@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charSet="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>elm-webpack-starter</title>
+    <meta name="description" content="Elm Webpack Starter"/>
+    <meta name="author" content="Peter Morawiec"/>
+    <link rel="shortcut icon" type="image/png" href="./favicon.ico"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+    <script src="//cdn.jsdelivr.net/highlight.js/9.4.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/mode/mllike/mllike.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="main"></div>
+    <textarea id="fsharpCode"></textarea>
+    <script type="text/javascript">
+        var fsharpEditor = CodeMirror.fromTextArea(document.getElementById('fsharpCode'), {
+          mode: 'text/x-fsharp',
+          lineNumbers: true,
+          matchBrackets: true
+        });
+    </script>
+  </body>
+</html>
