@@ -5,3 +5,10 @@ require('./highlight.pack.js');
 var Elm = require( './Main' );
 //Elm.Main.embed( document.getElementById( 'main' ) );
 var app = Elm.Main.fullscreen();
+app.ports.enableCodeMirror.subscribe(function(d){
+  CodeMirror.fromTextArea(document.getElementById(d), {
+    mode: 'text/x-fsharp',
+    lineNumbers: true,
+    matchBrackets: true
+  });
+})

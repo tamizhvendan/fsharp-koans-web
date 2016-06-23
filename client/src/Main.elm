@@ -1,13 +1,19 @@
 import Html exposing (..)
-import Html.Attributes exposing (..)
 import Html.App as Html
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Markdown
+import Port exposing (..)
 
 -- APP
 main : Program Never
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
-
+  Html.program
+    { init = init
+    , view = view
+    , update = update
+    , subscriptions = subscriptions
+    }
 
 -- MODEL
 type alias Model = Koan
@@ -36,18 +42,24 @@ Bind `y` to `20`
   """
   }
 
+init : (Model, Cmd Msg)
+init =
+  (model, Cmd.none)
 
 -- UPDATE
-type Msg = NoOp
+type Msg = NoOp | CM String
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    NoOp -> model
+    NoOp ->
+      (model, Cmd.none)
+    CM str ->
+      (model, enableCodeMirror "test")
 
-description : Model -> String
-description model =
-  model.description
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
 
 -- VIEW
 -- Html is defined as: elem [ attribs ][ children ]
@@ -57,4 +69,5 @@ view model =
   div []
     [Markdown.toHtml [] model.description
     , Markdown.toHtml [] model.snippet
-    , Markdown.toHtml [] model.tryYourself]
+    , Markdown.toHtml [] model.tryYourself
+    , textarea [id "test", onInput CM] [text model.snippet]]
